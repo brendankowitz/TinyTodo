@@ -1,0 +1,37 @@
+.completedTask label {
+    text-decoration: line-through;
+}
+
+#task-list .ui-btn {
+    margin: 0;
+}
+
+.task-list li {
+    line-height: 30px;
+}
+
+body.metro .ui-li.ui-li-static {
+    margin: 0;
+}
+
+.ui-body-c, .ui-overlay-c
+{
+    border: none;
+}
+
+body.metro .ui-header .ui-navbar li .ui-btn.ui-btn-active {
+    border-bottom: 2px solid #1BA1E2;
+}
+
+body.metro .ui-navbar .ui-grid-b { width:90%; }
+
+body.metro .ui-content {
+    min-height: 300px;
+}
+#task-list-page .ui-content {
+    min-height: 260px;
+}
+
+body.metro [data-role="footer"] {
+    text-align: center;
+}

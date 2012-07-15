@@ -1,0 +1,6 @@
+.metro-only, .ui-btn.metro-only, .ui-footer .ui-btn.metro-only, .ui-bar.metro-only {
+    display: none;
+}
+.non-metro {
+    display: block;
+}
