@@ -47,15 +47,19 @@ require(['jquery',
             window.TaskApplication = function () {
                 return {
                     setupHub: function () {
-                        var tasks = $.connection.taskHub;
-                        $.connection.hub.start(function () {
-                            tasks.name = 'hola';
-                            tasks.login("defaultUser");
-                        });
-                        tasks.refresh = function (e) {
-                            App.log('Changes detected, need to refresh: ' + e);
-                            Task.fetch();
-                        };
+                        try {
+                            var tasks = $.connection.taskHub;
+                            $.connection.hub.start(function() {
+                                tasks.name = 'hola';
+                                tasks.login("defaultUser");
+                            });
+                            tasks.refresh = function(e) {
+                                App.log('Changes detected, need to refresh: ' + e);
+                                Task.fetch();
+                            };
+                        }catch (e) {
+                            App.log(e);
+                        }
                     }
                 };
             }();
@@ -86,9 +90,9 @@ require(['jquery',
                 $('body').addClass('metro');
             }
             var isAndriod = navigator.userAgent.toLowerCase().indexOf("android") != -1;
-            if (isAndriod) {
+           // if (isAndriod) {
                 $('body').addClass('android');
-            }
+           // }
 
             if ($("html").is(".ui-mobile") === false) {
                 location.reload(true); //? sometimes jquery mobile doesn't finish initializing...

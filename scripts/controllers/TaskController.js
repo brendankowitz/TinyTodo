@@ -47,11 +47,12 @@ define("TaskController", ['jquery', 'models/Task', 'hogan', 'spine'],
 
             render: function () {
                 this.list.html(this.template(this.taskFilter()));
-                this.list.listview("refresh");
-                $("button", this.list).button();
                 try {
+                    this.list.listview("refresh");
+                    $("button", this.list).button();
                     $('[type="checkbox"]', this.list).checkboxradio();
-                }catch (e) {
+                } catch (e) {
+                    App.log(e);
                 }
             },
             
