@@ -2,9 +2,8 @@
 define("SettingsController", ['jquery', 'models/Task', 'spine', 'hogan', 'text!Views/Settings.htm'],
     function($, Task) {
         var detailController =  Spine.Controller.create({
-            elements: { "input[name=serverUrl]": "serverUrl" },
+            elements: { },
             events: {
-                "click .settings-save": "saveSettings",
                 "click .back-button": "cancelSettings"},
 
             init: function(){
@@ -18,14 +17,6 @@ define("SettingsController", ['jquery', 'models/Task', 'spine', 'hogan', 'text!V
             
             navigateHome: function() {
                 App.navigate("task-list-page", { reverse: true });
-            },
-
-            saveSettings: function () {
-                //this.item.title = $(this.serverUrl).val();
-                //this.item.save();
-                
-                this.navigateHome();
-                return this.item;
             },
 
             cancelSettings: function (e) {
@@ -42,5 +33,4 @@ define("SettingsController", ['jquery', 'models/Task', 'spine', 'hogan', 'text!V
         });
 
         return detailController;
-
 });

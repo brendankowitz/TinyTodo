@@ -14,8 +14,7 @@
         'TaskController': 'controllers/TaskController',
         'DetailController': 'controllers/DetailController',
         'SettingsController': 'controllers/SettingsController',
-        'signalr/taskHub': 'taskHubProxy',
-		'jquery/storage': 'jstorage'
+        'signalr/taskHub': 'taskHubProxy'
     },
     shim: {
         'jquery/mobile': ['jquery'],

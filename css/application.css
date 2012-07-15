@@ -35,3 +35,20 @@ body.metro .ui-content {
 body.metro [data-role="footer"] {
     text-align: center;
 }
+
+body.andriod *{
+    -webkit-transform: translateZ(0);
+}
+body.android .ui-header .ui-navbar li .ui-btn.ui-btn-active {
+    border: none;
+    border-bottom: 2px solid #1BA1E2;
+    background: #333333;
+}
+
+body.android .ui-btn-inner {
+    border-top: none;
+}
+
+body.android .task-list.ui-listview label {
+    
+}
