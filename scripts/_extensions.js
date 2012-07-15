@@ -95,8 +95,7 @@
                     || navigator.userAgent.match(/iPad/i)
                     || navigator.userAgent.match(/iPod/i) 
                     || navigator.userAgent.match(/Chrome/i)
-                    || navigator.userAgent.match(/Android/i)
-                   /* || (!navigator.userAgent.match(/Android/i) && navigator.userAgent.match(/Safari/i))*/
+                    || (!navigator.userAgent.match(/Android/i) && navigator.userAgent.match(/Safari/i))
                 )){
                     supportTransitions = false;
                 }
