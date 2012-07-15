@@ -90,9 +90,9 @@ require(['jquery',
                 $('body').addClass('metro');
             }
             var isAndriod = navigator.userAgent.toLowerCase().indexOf("android") != -1;
-           // if (isAndriod) {
+            if (isAndriod) {
                 $('body').addClass('android');
-           // }
+            }
 
             if ($("html").is(".ui-mobile") === false) {
                 location.reload(true); //? sometimes jquery mobile doesn't finish initializing...
