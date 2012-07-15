@@ -11,13 +11,15 @@
             var result;
             result = JSON.stringify(this);
             //return localStorage[this.className] = result;
-            $.jStorage.set(this.className, result);
+            window.localStorage.setItem(this.className, result);
+            //$.jStorage.set(this.className, result);
             return result;
         },
         loadLocal: function () {
             var result;
             //result = localStorage[this.className];
-            result = $.jStorage.set(this.className);
+            //result = $.jStorage.set(this.className);
+            result = window.localStorage.getItem(this.className);
             return this.refresh(result || [], {
                 clear: true
             });

@@ -15,7 +15,8 @@ require.config({
         'DetailController': 'controllers/DetailController',
         'SettingsController': 'controllers/SettingsController',
         'signalr/taskHub': 'taskHubProxy',
-        'jquery/storage': 'jstorage'
+        'jquery/storage': 'jstorage',
+        'phonegap/loader': 'phonegap-loader'
     },
     shim: {
         'jquery/mobile': ['jquery'],
@@ -33,6 +34,7 @@ require.config({
 require(['jquery',
     'models/Task',
     'models/Settings',
+//'phonegap/loader',
     'TaskController',
     'DetailController',
     'SettingsController',
@@ -49,56 +51,69 @@ require(['jquery',
                     setupHub: function () {
                         try {
                             var tasks = $.connection.taskHub;
-                            $.connection.hub.start(function() {
+                            $.connection.hub.start(function () {
                                 tasks.name = 'hola';
                                 tasks.login("defaultUser");
                             });
-                            tasks.refresh = function(e) {
+                            tasks.refresh = function (e) {
                                 App.log('Changes detected, need to refresh: ' + e);
                                 Task.fetch();
                             };
-                        }catch (e) {
+                        } catch (e) {
                             App.log(e);
                         }
                     }
                 };
-            }();
+            } ();
 
-            App.turnOffjQueryMobileFeatures();
-            App.enableHrefNavigation();
-            
-            Settings.configure();
 
-            App.registerController("TaskController", "task-list");
-            App.registerController("DetailController", "task-details");
-            App.registerController("SettingsController", "settings");
+            var onDeviceReady = function () {
 
-            Spine.Route.add("", function () {
-                App.log("Route for /");
-                App.navigate("task-list-page");
-            });
-            Spine.Route.add("offline", function () {
-                App.navigate("offline-page");
-            });
-            Spine.Route.add("about", function () {
-                App.navigate("about-page");
-            });
-            Spine.Route.setup();
+                App.turnOffjQueryMobileFeatures();
+                App.enableHrefNavigation();
 
-            var isWindowsPhone = navigator.userAgent.indexOf("MSIE") != -1;
-            if (isWindowsPhone) {//http://www.scottlogic.co.uk/blog/colin/2012/04/introducing-the-jquery-mobile-metro-theme/
-                $('body').addClass('metro');
-            }
-            var isAndriod = navigator.userAgent.toLowerCase().indexOf("android") != -1;
-            if (isAndriod) {
-                $('body').addClass('android');
-            }
+                Settings.configure();
 
-            if ($("html").is(".ui-mobile") === false) {
-                location.reload(true); //? sometimes jquery mobile doesn't finish initializing...
-            }
-            
-            TaskApplication.setupHub();
-            Task.fetch();
+                App.registerController("TaskController", "task-list");
+                App.registerController("DetailController", "task-details");
+                App.registerController("SettingsController", "settings");
+
+                Spine.Route.add("", function () {
+                    App.log("Route for /");
+                    App.navigate("task-list-page");
+                    //setTimeout(function () {
+                    //                        Task.fetch();
+                    //}, 2000);
+                });
+                Spine.Route.add("offline", function () {
+                    App.navigate("offline-page");
+                });
+                Spine.Route.add("about", function () {
+                    App.navigate("about-page");
+                });
+
+                $(document).bind("mobileinit", function () {
+                    Spine.Route.setup();
+                });
+
+                var isWindowsPhone = navigator.userAgent.indexOf("MSIE") != -1;
+                if (isWindowsPhone) { //http://www.scottlogic.co.uk/blog/colin/2012/04/introducing-the-jquery-mobile-metro-theme/
+                    $('body').addClass('metro');
+                }
+                var isAndriod = navigator.userAgent.toLowerCase().indexOf("android") != -1;
+                if (isAndriod) {
+                    $('body').addClass('android');
+                }
+
+                if ($("html").is(".ui-mobile") === false) {
+                    location.reload(true); //? sometimes jquery mobile doesn't finish initializing...
+                }
+
+                Task.fetch();
+            };
+
+            //TaskApplication.setupHub();
+
+            document.addEventListener("deviceready", onDeviceReady, false);            
         });
     });

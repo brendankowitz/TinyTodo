@@ -14,7 +14,8 @@
         'TaskController': 'controllers/TaskController',
         'DetailController': 'controllers/DetailController',
         'SettingsController': 'controllers/SettingsController',
-        'signalr/taskHub': 'taskHubProxy'
+        'signalr/taskHub': 'taskHubProxy',
+        'phonegap/loader': 'phonegap-loader'
     },
     shim: {
         'jquery/mobile': ['jquery'],

@@ -1,26 +1,27 @@
 
 define("DetailController", ['jquery', 'models/Task', 'spine', 'hogan', 'text!Views/TaskDetails.htm'],
-    function($, Task) {
-        var detailController =  Spine.Controller.create({
-            elements: {"#task-title": "taskTitle"},
-            events: {"click .task-save": "saveTask",
+    function ($, Task) {
+        var detailController = Spine.Controller.create({
+            elements: { "#task-title": "taskTitle" },
+            events: { "click .task-save": "saveTask",
                 "click .task-cancel": "cancelTask",
-                "loadTask": "loadTask"},
+                "loadTask": "loadTask"
+            },
 
-            init: function(){
+            init: function () {
                 this.render();
                 this.routes({
                     "task-details": function () {
-                        this.render();
                         this.el.activate();
                     }
                 });
+                this.render();
             },
-            
-            navigateHome: function() {
+
+            navigateHome: function () {
                 App.navigate("task-list-page", { reverse: true });
             },
-            
+
             loadTask: function (e) {
                 App.log("details for: /task/", e.task.id);
                 if (e.task.id === "new") {
@@ -32,9 +33,12 @@ define("DetailController", ['jquery', 'models/Task', 'spine', 'hogan', 'text!Vie
                 $(this.taskTitle).val(this.item.title);
             },
 
-            saveTask: function() {
+            saveTask: function () {
                 this.item.title = $(this.taskTitle).val();
-                this.item.save();
+                var type = this.item;
+                setTimeout(function () {
+                    type.save();
+                }, 10);
                 this.navigateHome();
                 return this.item;
             },
@@ -43,8 +47,8 @@ define("DetailController", ['jquery', 'models/Task', 'spine', 'hogan', 'text!Vie
                 e.preventDefault();
                 this.navigateHome();
             },
-            
-            render: function() {
+
+            render: function () {
                 var view = require("text!Views/TaskDetails.htm");
                 this.el.render(view);
                 this.refreshElements();
@@ -54,4 +58,4 @@ define("DetailController", ['jquery', 'models/Task', 'spine', 'hogan', 'text!Vie
 
         return detailController;
 
-});
+    });

@@ -24,7 +24,6 @@ define("TaskController", ['jquery', 'models/Task', 'hogan', 'spine'],
                         this.el.activate();
                     }
                 });
-                
             },
 
             template: function (data) {
@@ -46,12 +45,14 @@ define("TaskController", ['jquery', 'models/Task', 'hogan', 'spine'],
             },
 
             render: function () {
+                App.log("Render tasks");
                 this.list.html(this.template(this.taskFilter()));
                 try {
                     this.list.listview("refresh");
                     $("button", this.list).button();
                     $('[type="checkbox"]', this.list).checkboxradio();
                 } catch (e) {
+                    App.log("Render task error");
                     App.log(e);
                 }
             },

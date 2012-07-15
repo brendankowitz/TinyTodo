@@ -175,15 +175,18 @@
                     return page;
                 }
                 isNavigating++;
-                try {
-                    $.mobile.changePage(page, { transition: transition, reverse: reverse, role: role, changeHash: false });
-                } catch(e) {
-                    App.log(e);
-                }
-                if (silent == false) {
-                    Spine.Route.navigate(page.data("url"));
-                }
-                $.mobile.activePage = page;
+                setTimeout(function() {
+                    try {
+                        $.mobile.changePage(page, { transition: transition, reverse: reverse, role: role, changeHash: false });
+                    } catch(e) {
+                        App.log("Navigate error");
+                        App.log(e);
+                    }
+                    if (silent == false) {
+                        Spine.Route.navigate(page.data("url"));
+                    }
+                    $.mobile.activePage = page;
+                }, 0);
                 return page;
             },
 

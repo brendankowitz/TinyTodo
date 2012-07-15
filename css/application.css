@@ -19,6 +19,11 @@ body.metro .ui-li.ui-li-static {
     border: none;
 }
 
+body.metro {
+    background-color: #000;
+    color: #fff;
+}
+
 body.metro .ui-header .ui-navbar li .ui-btn.ui-btn-active {
     border-bottom: 2px solid #1BA1E2;
 }
